@@ -23,7 +23,7 @@ extern const char *get_report( int table, int gtable, int key );
 extern char *get_report_strdup( int table, int gtable, int key );
 extern int output_birth_head_group( FILE *stream, unsigned int mode, struct BIRTH_DB *data,
    int table, int house_mode, char *cmt, struct DATA_PACKET *dpk, int gtable );
-extern output_comp_head_group( FILE *stream, unsigned int mode,
+extern int output_comp_head_group( FILE *stream, unsigned int mode,
     struct BIRTH_DB *data, struct BIRTH_DB *padata, int table,
     int house_mode, char *cmt, struct DATA_PACKET *dpk, int gtable );
 extern int output_trans_head_group( FILE *stream, unsigned int mode, struct BIRTH_DB *data, char *cmt,
@@ -59,4 +59,8 @@ extern int output_aspect_count( FILE *stream, char *s1, char *s2, char *rpt );
 extern int output_sex_codes( FILE *stream, int sex, int sexno, int table );
 extern int output_sign_count( FILE *stream, char *s1, char *s2, char *rpt );
 extern int output_house_count( FILE *stream, char *s1, char *s2, char *rpt );
+extern const char * planet_str(short planet);
+extern const char * aspect_str( short aspect);
+extern const char * sign_str(short sign);
+extern const char * number_str(short number);
 

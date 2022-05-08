@@ -27,7 +27,7 @@ ARAB_PART arabic_data[N_ARAB_PART] = {
   ASCEND, PART_FORTU, SATURN,                     ASCEND, MOON, MERCURY,
   ASCEND, MOON, URANUS,                           ASCEND, PART_FORTU, NEPTUNE };
 
-char *arabic_names[N_ARAB_PART] = {
+const char *arabic_names[N_ARAB_PART] = {
   "Comemerce (Caduceus)", "Love (Heart)", "Passion (Sword)",
   "Increase (Pomegranate)", "Fate or Part of Responsibility (Hourglass)",
   "Catastrophe (Lightning Flash)", "Treachery (Trident)",

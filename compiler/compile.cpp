@@ -16,13 +16,11 @@
 #include "arabpt.h"
 #include <memory.h>
 #include <string.h>
-#include "cJSON.h"
 #include "compile.hpp"
 #include "orbs.h"
 #include <string.h>
 #include <malloc.h>
 #include "ChartWriter.h"
-#include "JsonChartWriter.h"
 #include "files.h"
 
 
@@ -59,12 +57,13 @@ int NatalChartCompiler::writeData()
 {
  FILE *stream = getOutputFile();
  ChartWriter *wrt = NULL;
- if (strcmp(format,"json")!=0) {
+ wrt = new ChartWriter(stream);
+ /* (strcmp(format,"json")!=0) {
 	wrt =new ChartWriter(stream);
  }
  else {
 	wrt = new JsonChartWriter(stream);
- }
+ }*/
  wrt->writeNatal(maxpt);
  delete wrt;
  return( 1 );
@@ -95,12 +94,13 @@ int CompChartCompiler::writeData()
 {
  FILE *stream = getOutputFile();
  ChartWriter *wrt = NULL;
- if (strcmp(format,"json")!=0) {
+ wrt = new ChartWriter(stream);
+ /*if(strcmp(format,"json")!=0) {
 	wrt =new ChartWriter(stream);
  }
  else {
 	wrt = new JsonChartWriter(stream);
- }
+ }*/
  if ( chartType == Compatibility  ) {
 	 wrt->writeCompat(maxpt);
  }
@@ -126,12 +126,13 @@ int ProgChartCompiler::writeData()
 {
  FILE *stream = getOutputFile();
  ChartWriter *wrt = NULL;
- if (strcmp(format,"json")!=0) {
+  wrt = new ChartWriter(stream);
+ /*if (strcmp(format,"json")!=0) {
 	wrt =new ChartWriter(stream);
  }
  else {
 	wrt = new JsonChartWriter(stream);
- }
+ }*/
  wrt->writeProgr(maxpt);
  delete wrt;
  return( 1 );
@@ -186,12 +187,13 @@ int TransChartCompiler::writeData()
 {
  FILE *stream = getOutputFile();
  ChartWriter *wrt = NULL;
- if (strcmp(format,"json")!=0) {
+  wrt = new ChartWriter(stream);
+ /*if (strcmp(format,"json")!=0) {
 	wrt =new ChartWriter(stream);
  }
  else {
 	wrt = new JsonChartWriter(stream);
- }
+ }*/
  wrt->writeTrans(maxpt);
  delete wrt;
  return( 1 );

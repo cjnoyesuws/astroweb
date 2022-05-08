@@ -5,15 +5,15 @@
 #include "dataext.h"
 #include "ChartWriter.h"
 
-int ChartWriter::writeLine(char *key, char *buff) {
+int ChartWriter::writeLine(const char *key, const char *buff) {
 	return fprintf(stream, "%s=%s\n", key, buff );
 }
 
-int ChartWriter::writeSection(char *key) {
+int ChartWriter::writeSection(const char *key) {
 	return fprintf(stream,"[%s]\n",key);
 }
 
-int ChartWriter::writeHouses(char *sec, short *houses) {
+int ChartWriter::writeHouses(const char *sec, short *houses) {
 	writeSection(sec);
 	for (int i =0; i < 12; i++) {
 	    fprintf(stream,"house%d=%d\n", i+1, houses[i]);
@@ -21,18 +21,18 @@ int ChartWriter::writeHouses(char *sec, short *houses) {
 	return 1;
 }
 
-int ChartWriter::writeAspect(char *key, int planet, ASPEC &aspect ) {
+int ChartWriter::writeAspect(const char *key, int planet, ASPEC &aspect ) {
 	return fprintf(stream,"%s=\"%d,%d,%d,%d\"\n", key, planet, aspect.planet, aspect.aspect, aspect.orb );
 }
 
-int ChartWriter::writePlanet(char *key, int index, AS_INF &data) {
+int ChartWriter::writePlanet(const char *key, int index, AS_INF &data) {
 return fprintf(stream,"%s=\"%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\"\n",key, index, data.minutes_total, data.sign, data.cusp, data.degree_minor, data.minutes_minor, data.house, data.house_cusp, data.intercepted,
    data.retrograde, data.misc_code);
 }
 
-int ChartWriter::writeAspects(char *key, int index, int planet, AS_INF &data ) {
+int ChartWriter::writeAspects(const char *key, int index, int planet, AS_INF &data ) {
    char buf[30];
-   
+
    for (int i =0; i < data.no_aspects; i++, index++) {
 	   sprintf(buf,"%s%d",key,index+1);
 	   writeAspect(buf,planet,data.aspectr[i]);
@@ -40,7 +40,7 @@ int ChartWriter::writeAspects(char *key, int index, int planet, AS_INF &data ) {
    return index;
 }
 
-int ChartWriter::writeAspects(char *sec, AS_INF *data, int count) {
+int ChartWriter::writeAspects(const char *sec, AS_INF *data, int count) {
 	int index = 0;
 	writeSection(sec);
 	for (int i = 0; i < count; i++ ) {
@@ -49,9 +49,9 @@ int ChartWriter::writeAspects(char *sec, AS_INF *data, int count) {
 	return 1;
 }
 
-int ChartWriter::writePlanets(char *sec, AS_INF *data, int count, int start) {
+int ChartWriter::writePlanets(const char *sec, AS_INF *data, int count, int start) {
 	char buf[30];
-	
+
 	writeSection(sec);
 	for (int i = start; i < count; i++ ) {
 	   sprintf(buf,"planet%d",i+1);
@@ -90,13 +90,13 @@ int ChartWriter::writeTrans(int maxpt) {
 		writeTransitChart(i);
 	}
 	return 1;
-} 
+}
 
 int ChartWriter::writeTransitDates() {
 	writeSection("TransitDates");
 	for (int i = 0; i < transit_data.num_transits; i++) {
 		DATES dp = date_ptr[i];
-	    fprintf(stream,"date%d=\"%d/%d/%d\"\n",i+1,(int)dp.month,(int)dp.day,(int)dp.year); 
+	    fprintf(stream,"date%d=\"%d/%d/%d\"\n",i+1,(int)dp.month,(int)dp.day,(int)dp.year);
 	}
 	return 1;
 }

@@ -23,8 +23,8 @@ void do_mem_error( int fatal )
 #define NON_FATAL 0
 
 static char buf[500];
-static char a_title[] = "Error";
-static char stdmsg[] = { "%s : System Error #%d--%s" };
+static const char a_title[] = "Error";
+static const char stdmsg[] = { "%s : System Error #%d--%s" };
 
 //#define stdmsg RESSTR_E_STD /*"%s : System Error #%d--%s"*/
 
@@ -39,7 +39,7 @@ char *errors[] = { stdmsg, NULL, "File or Directory Does Not Exist!",
    "No Space Left on Drive", NULL, NULL, NULL, NULL, stdmsg, stdmsg,
    NULL, stdmsg, NULL, "Error or Printer Not Ready!" };
 #else
-char *errors[] = { "No Error!", stdmsg, "File or Directory Does Not Exist!",
+const char *errors[] = { "No Error!", stdmsg, "File or Directory Does Not Exist!",
    "File or Directory Does Not Exist!", "Too Many Open Files!",
    "Access To File or Device Denied!", stdmsg, "Memory Blocks Destroyed!",
    "Not Enough Memory Exists!", stdmsg, stdmsg, stdmsg, stdmsg, stdmsg,
@@ -67,21 +67,20 @@ return( alert_box( title, CResStr(id) );
 }
 */
 
-int error_message(char *fmt, ... )
+int error_message(const char *fmt, ... )
 {
 	va_list marker;
 	va_start( marker, fmt );
 	vsprintf( buf, fmt, marker );
     va_end( marker );
     assert( strlen( buf ) < sizeof( buf ) );
-    fprintf(getErrorFile(),"Error--%s\n",buf); 
+    fprintf(getErrorFile(),"Error--%s\n",buf);
     return( 1 );
 }
 
-
-int alert_box( char *title, char *fmt, ... )
+int alert_box(const char *title,const  char *fmt, ... )
 {
- char *a_title = /*CResStr(RESSTR_E_MSG)*/ "Error";
+ const char *a_title = /*CResStr(RESSTR_E_MSG)*/ "Error";
  va_list marker;
 
  if ( title == NULL || !strcmp(title, "")  )
@@ -90,14 +89,14 @@ int alert_box( char *title, char *fmt, ... )
  vsprintf( buf, fmt, marker );
  va_end( marker );
  assert( strlen( buf ) < sizeof( buf ) );
- fprintf(getErrorFile(),"%s--%s\n",title,buf); 
+ fprintf(getErrorFile(),"%s--%s\n",title,buf);
  return( 1 );
 }
 
-int alert_box_ext( char *title, char *fmt, ... )
+int alert_box_ext( const char *title, const char *fmt, ... )
 {
  int result;
- char *a_title = /*CResStr(RESSTR_E_MSG)*/ "Error";
+ const char *a_title = /*CResStr(RESSTR_E_MSG)*/ "Error";
  va_list marker;
 
  if ( title == NULL || !strcmp(title, "") )
@@ -114,7 +113,7 @@ int alert_box_ext( char *title, char *fmt, ... )
 
 void do_error( const char *file )
 {
- static char spmsg[] = { "Call Technical Support With This Error!" };
+ static const char spmsg[] = { "Call Technical Support With This Error!" };
 
  if ( errno == ENOMEM ) {
     do_mem_error( FALSE );

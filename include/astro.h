@@ -80,15 +80,15 @@ typedef short BOOL;
 #define    PISCES     11
 
 /* a few global types */
-//#define DEGR short /* degrees */
-//#define MINU short /* minutes */
-//#define STAT short /* error no error like BOOL */
-//#define LMIN long  /* long minutes */
-//#define NUM short  /* number from 0 to ? like enum */
-//#define BITS unsigned short /* bitfield type */
-//#define HRS short  /* number of hours as unit */
-//#define COUNT short /* counting variable */
-//#define UDEGR unsigned short /* degrees in unsigned */
+#define DEGR short /* degrees */
+#define MINU short /* minutes */
+#define STAT short /* error no error like BOOL */
+#define LMIN long  /* long minutes */
+#define NUM short  /* number from 0 to ? like enum */
+#define BITS unsigned short /* bitfield type */
+#define HRS short  /* number of hours as unit */
+#define COUNT short /* counting variable */
+#define UDEGR unsigned short /* degrees in unsigned */
 
 #ifndef _MSC_VER
 #endif

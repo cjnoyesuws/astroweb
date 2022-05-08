@@ -31,13 +31,13 @@ extern double sun_longitude;
 extern void get_house_cusps( short *c );
 #endif
 
-
+/*
 int _matherr( struct _exception *e )
 {
- static char *errs[] = { "", "Domain", "Singularity", "Overflow",
+ static const char *errs[] = { "", "Domain", "Singularity", "Overflow",
    "Underflow", "Total Loss of Significance", "Partial Loss of Significance" };
 
- if ( (!strcmpi(e->name, "acos" ) || !strcmpi(e->name, "asin" )) && e->type == DOMAIN ) {
+ if ( (!strcmp(e->name, "acos" ) || !strcmpi(e->name, "asin" )) && e->type == DOMAIN ) {
     alert_box( "MATH ERROR!!", "Too High Latitude for Ascendant, "
 		 "or Too Low Latitude for Vertex!!" );
     e->retval = 0.0;
@@ -58,7 +58,7 @@ int _matherr( struct _exception *e )
  longjmp( j, 3 );
  return( 1 );
 }
-
+*/
 /*
 typedef void (*sigtype)(int sig);
 

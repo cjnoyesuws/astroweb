@@ -95,8 +95,9 @@ const char *number_str(short number )
 	 "Eighth", "Ninth", "Tenth", "Eleventh", "Twelfth", "ERROR!!"
          };
  const char *p;
- if ( number > 13 )
+ if ( number > 13 ) {
     number = 13;
+    }
     return( numbers[number] );
  }
 
@@ -109,14 +110,13 @@ const char *aspect_str( short aspect )
 	 "ERROR!!"
 	 };
  const char *p;
- if ( aspect > 13 )
     aspect = 13;
     return( aspects[aspect] );
  }
 
 char *format_degs( short min, char *buf )
 {
- static char signs[12][4] = { "ARI", "TAU", "GEM", "CAN", "LEO", "VIR",
+ static const char signs[12][4] = { "ARI", "TAU", "GEM", "CAN", "LEO", "VIR",
 			      "LIB", "SCO", "SAG", "CAP", "AQU", "PIS" };
  const char *p;
     sprintf( buf, "%-2.2d%3s%-2.2d", minor_degrees( min ), signs[ sign(min) ],
@@ -138,7 +138,7 @@ void print_cusps(FILE *stream, short *house_cusps )
 
 const char *month_str( short month )
 {
-  static char *months[] = { "January", "February", "March", "April",
+  static const char *months[] = { "January", "February", "March", "April",
     "May", "June", "July", "August", "September", "October",
     "November",  "December",  "Error!!" };
   const char *p;

@@ -20,13 +20,12 @@
 #include "cJSON.h"
 #include "compile.hpp"
 #include "orbs.h"
-#include "io.h"
 #include "OptionsReader.h"
 #include "files.h"
-#include "JsonOptionsReader.h"
+//#include "JsonOptionsReader.h"
 #include "ConfigHelper.h"
 #include "DataReader.h"
-#include "JsonDataReader.h"
+//#include "JsonDataReader.h"
 
 #define debugLogOut(p)
 
@@ -80,9 +79,9 @@ int ChartCompiler::setup()
         if (strcmp(format,"json") != 0) {
             rd =new OptionsReader(stream);
         }
-        else {
+        /*else {
             rd = new JsonOptionsReader(stream);
-        }
+        }*/
         int status =rd->readOptions(op);
         delete rd;
 	}
@@ -96,9 +95,9 @@ int ChartCompiler::setup()
 	if (strcmp(format,"json")!= 0) {
 		dr = new DataReader(stream);
 	}
-	else {
+	/*else {
 	    dr = new JsonDataReader(stream);
-	}
+	}*/
 	int response = dr->readData();
 	delete dr;
 	unsigned int mode = op.getFlags();
@@ -114,7 +113,7 @@ int ChartCompiler::setup()
 
 int ChartCompiler::runChart()
 {
- setup();
+ doSetup();
  if ( !compile() || _break ) {
     cleanUp(0);
 	//fclose(teststream);
@@ -135,22 +134,22 @@ int ChartCompiler::cleanUp( int ok )
  return( 1 );
 }
 
-int doCompileChart(char *type, char *format) {
+int doCompileChart(const char *type, const char *format) {
    ChartCompiler *comp = NULL;
 
-   if (strcmpi(type,"natal")==0) {
+   if (strcmp(type,"natal")==0) {
 	   comp = new NatalChartCompiler(Numeric);
    }
-   else if (strcmpi(type,"compat")==0){
+   else if (strcmp(type,"compat")==0){
 	   comp = new CompChartCompiler(Compatibility);
    }
-   else if (strcmpi(type,"compos")==0){
+   else if (strcmp(type,"compos")==0){
 	   comp = new CompChartCompiler(Compos);
    }
-   else if (strcmpi(type,"progr")==0){
+   else if (strcmp(type,"progr")==0){
 	   comp = new ProgChartCompiler(Progress);
    }
-   else if (strcmpi(type,"trans")==0){
+   else if (strcmp(type,"trans")==0){
 	   comp = new TransChartCompiler(Transits);
    }
    if (comp != NULL) {

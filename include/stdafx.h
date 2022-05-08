@@ -8,7 +8,6 @@
 #ifndef STDAFX_H_
 #define STDAFX_H_
 
-#define BOOL int
 #define near
 #define far
 #define FALSE 0

@@ -15,7 +15,7 @@ static entry flags[8] = {{"default",DEFAULTFLGS},{"sidereal",SIDEREAL},{"houses"
     {"vertext-eastpoint",VERT_EAST},{"rectify",NOBIRTHTIM},{"asteroids",ASTEROID}};
 
 
-unsigned short ConfigHelper::parseFlags(char *text) {
+unsigned short ConfigHelper::parseFlags(const char *text) {
     unsigned short flagsval= 0;
     int pos=0;
     char buf[40];
@@ -23,7 +23,7 @@ unsigned short ConfigHelper::parseFlags(char *text) {
     memset(buf,0,40);
 
     if (strchr(text,'|')==0) {
-        return (unsigned short)findEntry(text,flags,8);
+        return (unsigned short)findEntry(text,flags,8,DEFAULTFLGS);
     }
 
     for (int i = 0; i < strlen(text); i++) {
@@ -32,41 +32,41 @@ unsigned short ConfigHelper::parseFlags(char *text) {
         }
         else {
             buf[pos++]='\0';
-            flagsval |= findEntry(buf,flags,8);
+            flagsval |= findEntry(buf,flags,8,0);
             pos=0;
         }
     }
 
     buf[pos++]='\0';
-    flagsval |= findEntry(buf,flags,8);
+    flagsval |= findEntry(buf,flags,8,0);
     return flagsval;
 }
 
-short ConfigHelper::findHouses(char *text) {
-    return findEntry(text,house,10);
+short ConfigHelper::findHouses(const char *text) {
+    return findEntry(text,house,10,PLACIDUS);
 }
 
 
-short ConfigHelper::findRect(char *text) {
-    return findEntry(text,rect,3);
+short ConfigHelper::findRect(const char *text) {
+    return findEntry(text,rect,3,SOLARCHART);
 }
 
 
-short ConfigHelper::findProgressed(char *text) {
-    return findEntry(text,progressed,3);
+short ConfigHelper::findProgressed(const char *text) {
+    return findEntry(text,progressed,3,SECONDARY_PR);
 }
 
 
-short ConfigHelper::findChartCode(char *text) {
-    return findEntry(text,charts,5);
+short ConfigHelper::findChartCode(const char *text) {
+    return findEntry(text,charts,5,NATAL_CH);
 }
 
-short ConfigHelper::findEntry(char *text, entry *entries, int count, int dflt) {
+short ConfigHelper::findEntry(const char *text, entry *entries, int count, int dflt) {
    assert(entries != 0);
    assert(text != 0);
 
    for (int i = 0;  i < count; i++ ) {
-       if (stricmp(entries[i].label, text)==0) {
+       if (strcmp(entries[i].label, text)==0) {
            return entries[i].value;
        }
    }

@@ -5,14 +5,14 @@
 class ChartWriter {
 protected:
 	FILE *stream;
-	int writeLine(char *key, char *buff);
-	int writeSection(char *key);
-	int writeHouses(char *key, short *houses);
-	int writeAspect(char *key, int planet, ASPEC &aspect );
-	int writeAspects(char *sec, AS_INF *data, int count);
-	int writeAspects(char *key, int index, int planet, AS_INF &data);
-	int writePlanet(char *key, int index, AS_INF &data);
-	int writePlanets(char *, AS_INF *data, int count, int start=0);
+	int writeLine(const char *key, const char *buff);
+	int writeSection(const char *key);
+	int writeHouses(const char *key, short *houses);
+	int writeAspect(const char *key, int planet, ASPEC &aspect );
+	int writeAspects(const char *sec, AS_INF *data, int count);
+	int writeAspects(const char *key, int index, int planet, AS_INF &data);
+	int writePlanet(const char *key, int index, AS_INF &data);
+	int writePlanets(const char *, AS_INF *data, int count, int start=0);
 	int writeTransitDates();
 	int writeTransitChart(int index);
 public:
